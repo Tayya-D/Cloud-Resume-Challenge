@@ -5,7 +5,7 @@ Following the Cloud Resume Challenge - I have put together my CV using a templat
 This included removing a lot of the pages included in the initial template and amending the code for the design and content via HTML and CSS.
 
 ## Breakdown of the Challenge
-- Create your HTML5 Resume/CV
+- Create your HTML5 Resume/CV (COMPLETE)
 - Feature 2
 - Feature 3
 
