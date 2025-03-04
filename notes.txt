@@ -1,0 +1,19 @@
+When using git, start at root: ~ (make sure git is initialised via "git init")
+Then cd to your repo - you should end up on the "main" branch by default
+If you do not have a repo and you want to create one: 
+    1) create on GitHub directly then clone the repo via "git clone <link to repo>"
+    2) or create the repo via VScode first and then push it along with your initial commit
+        - (will add details once I have tested this myself)
+    3) you now have the up to date main branch of your repo and can start adding files and resources
+
+    key commands:
+    git status --> checks whether you are up to date with main and if there are any changes that are unstaged (these will appear RED)
+    git add <filename> --> to stage and add your changes to the queue essentially (you can rerun "git status" again and the staged changes will appear GREEN)
+    git commit - m "<message>" --> this command submits/commits the queued changes with an informative message
+    git push <origin main / or branch-name > --> this command allows you to PUSH your changes to the GitHub repo
+
+Get Pull requests working (pending)
+
+
+
+
