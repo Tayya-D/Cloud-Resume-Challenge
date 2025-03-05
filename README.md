@@ -6,7 +6,14 @@ This included removing a lot of the pages included in the initial template and a
 
 ## Breakdown of the Challenge
 1) Create your Resume/CV with HTML and CSS (COMPLETE)
-2) Create a static Website deloyed on AWS S3
+2) Create a static Website deloyed on AWS S3 (COMPLETE)
+   - Changed region to Europe(London) for faster load times
+   - Named S3 bucket tayya-cloud-resume-challenge (fyi AWS doesn't accepts names w/ caps)
+   - Add a tag with "Key: project" and "Value: Cloud Resume Challenge"
+   - Set default encryption 
+   - Upload website folder
+   - Set "Static website hosting" to "Enable" in the Properties of the S3 Bucket and set the index document name to index.html (if yours is different make sure you use the right filename) + save changes
+   - Navigate to your index.html in Objects in your S3 Bucket - click on the Object URL (you should get a XML file error - beacuse the bucket is not public. We can fix this via CloudFront) 
 3) Website should use HTTPS for security via AWS CloudFront 
 4) Create a custom DNS domain name via AWS Route53
 5) Create a visitor counter via JavaScript
