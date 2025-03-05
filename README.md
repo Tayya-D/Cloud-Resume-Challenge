@@ -5,9 +5,11 @@ Following the Cloud Resume Challenge - I have put together my CV using a templat
 This included removing a lot of the pages included in the initial template and amending the code for the design and content via HTML and CSS.
 
 ## Breakdown of the Challenge
-- Create your HTML5 Resume/CV (COMPLETE)
-- Feature 2
-- Feature 3
+- Create your Resume/CV with HTML and CSS (COMPLETE)
+- Create a static Website deloyed on AWS S3
+- Website should use HTTPS for security via AWS CloudFront 
+- Create a custom DNS domain name via AWS Route53
+-
 
 ## Installation
 1. Clone the repository:
