@@ -27,7 +27,7 @@ This included removing a lot of the pages included in the initial template and a
       - Open a new AWS console window > S3 > your_bucket > Permissions > Edit Bucket Policy + paste the copied CloudFront policy > save changes (it should look like something like the cloudfrontpolicy.json file in this repo)
       - UPDATE - Set a Default root object > set as your index.html (this will point the distibution to the desired page - in this case its our cv)
       - At this point you can test the distribution URL to see if your resume loads
-         - I had an issue where I ecountered an "Access Denied" error message and proceeded to troubleshoot and went as far as to create an AppendIndexHTML function - the issue still persisted. 
+         - I had an issue where I encountered an "Access Denied" error message and proceeded to troubleshoot and went as far as to create an AppendIndexHTML function - the issue still persisted. 
          - The issue was that all my files (including the index.html) were in a parent folder. So I deleted everything in the bucket and reuploaded the files as the are; the only folder I had was the /images folder --> this ended up fixing my "Access Denied" error and fully loaded my resume as expected.  
 
 4) Create a custom DNS domain name via AWS Route53
