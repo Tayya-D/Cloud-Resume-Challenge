@@ -31,6 +31,7 @@ This included removing a lot of the pages included in the initial template and a
          - The issue was that all my files (including the index.html) were in a parent folder. So I deleted everything in the bucket and reuploaded the files as the are; the only folder I had was the /images folder --> this ended up fixing my "Access Denied" error and fully loaded my resume as expected.  
 
 4) Create a custom DNS domain name via AWS Route53
+- This step will also us to set a custom URL for our website
 
 5) Create a visitor counter via JavaScript
 
