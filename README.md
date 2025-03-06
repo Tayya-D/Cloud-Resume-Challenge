@@ -32,6 +32,8 @@ This included removing a lot of the pages included in the initial template and a
 
 4) Create a custom DNS domain name via AWS Route53
 - This step will also us to set a custom URL for our website
+- Navigate to Route 53 > register domain > enter domain name (I chose "<domain-name>.click" - this only costs £3 to run yearly) > checkout (I set auto-renew to No - I'll where I am in a year and renew if I want when the time comes)
+- In the CloudFront settings for your distribution, the Alternate domain names is not set. Select edit and Add item under CNAME
 
 5) Create a visitor counter via JavaScript
 
