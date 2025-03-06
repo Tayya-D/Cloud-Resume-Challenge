@@ -12,7 +12,7 @@ This included removing a lot of the pages included in the initial template and a
    - Add a tag with "Key: project" and "Value: Cloud Resume Challenge"
    - Set default encryption 
    - Upload website folder
-   - Set "Static website hosting" to "Enable" in the Properties of the S3 Bucket and set the index document name to index.html (if yours is different make sure you use the right filename) + save changes
+   - Set "Static website hosting" to "Enable" in the Properties of the S3 Bucket and set the index document name to index.html (if yours is different make sure you use the right filename) + save changes (UPDATE - can set this to Disabled)
    - Navigate to your index.html in Objects in your S3 Bucket - click on the Object URL (you should get a XML file error - beacuse the bucket is not public. We can fix this via CloudFront in the next step) 
 3) Website should use HTTPS for security via AWS CloudFront 
    - CloudFront is an AWS service that helps deliver data at a low latency and higher transfer speed.
@@ -23,6 +23,7 @@ This included removing a lot of the pages included in the initial template and a
       - Viewer protocol policy > Allow only HTTPS access 
       - Create distribution > Copy the policy CloudFront provides to update your S3 Bucket with
       - Open a new AWS console window > S3 > your_bucket > Permissions > Edit Bucket Policy + paste the copied CloudFront policy > save changes (it should look like something like the cloudfrontpolicy.json file in this repo)
+      - UPDATE - Set a Default root object > set as your index.html
 4) Create a custom DNS domain name via AWS Route53
 5) Create a visitor counter via JavaScript
 6) Create a AWS DynamoDB to store and update the counter
