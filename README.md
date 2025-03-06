@@ -6,6 +6,7 @@ This included removing a lot of the pages included in the initial template and a
 
 ## Breakdown and Walkthrough of the Challenge
 1) Create your Resume/CV with HTML and CSS (COMPLETE)
+
 2) Create a static Website deloyed on AWS S3 (COMPLETE)
    - Changed region to Europe(London) for faster load times
    - Named S3 bucket <name>-cloud-resume-challenge (fyi AWS doesn't accepts names w/ caps)
@@ -14,7 +15,8 @@ This included removing a lot of the pages included in the initial template and a
    - Upload website folder
    - Set "Static website hosting" to "Enable" in the Properties of the S3 Bucket and set the index document name to index.html (if yours is different make sure you use the right filename) + save changes (UPDATE - can set this to Disabled)
    - Navigate to your index.html in Objects in your S3 Bucket - click on the Object URL (you should get a XML file error - beacuse the bucket is not public. We can fix this via CloudFront in the next step) 
-3) Website should use HTTPS for security via AWS CloudFront 
+
+3) Website should use HTTPS for security via AWS CloudFront (COMPLETE) 
    - CloudFront is an AWS service that helps deliver data at a low latency and higher transfer speed.
    - Navigate to CloudFront, create distribution > origin domain is Your_S3_Bucket.s3.your_region.amazonaws.com
    - Set Origin access to "Origin access control settings(recommended)" 
@@ -23,13 +25,23 @@ This included removing a lot of the pages included in the initial template and a
       - Viewer protocol policy > Allow only HTTPS access 
       - Create distribution > Copy the policy CloudFront provides to update your S3 Bucket with
       - Open a new AWS console window > S3 > your_bucket > Permissions > Edit Bucket Policy + paste the copied CloudFront policy > save changes (it should look like something like the cloudfrontpolicy.json file in this repo)
-      - UPDATE - Set a Default root object > set as your index.html
+      - UPDATE - Set a Default root object > set as your index.html (this will point the distibution to the desired page - in this case its our cv)
+      - At this point you can test the distribution URL to see if your resume loads
+         - I had an issue where I ecountered an "Access Denied" error message and proceeded to troubleshoot and went as far as to create an AppendIndexHTML function - the issue still persisted. 
+         - The issue was that all my files (including the index.html) were in a parent folder. So I deleted everything in the bucket and reuploaded the files as the are; the only folder I had was the /images folder --> this ended up fixing my "Access Denied" error and fully loaded my resume as expected.  
+
 4) Create a custom DNS domain name via AWS Route53
+
 5) Create a visitor counter via JavaScript
+
 6) Create a AWS DynamoDB to store and update the counter
+
 7) Create an API that accepts requests from your web app and communicate with the DB using AWS API Gateway and Lambda
+
 8) Use Python to code your Lambda functions
+
 9) Include some tests in your Python code 
+
 10) Configure your API resources using Infrastructure as Code via Terraform
 11) Create a GitHub repo to manage your CI/CD Back-End + GitHub Actions
 12) Create a GitHub repo to manage your CI/CD Front-End to for your website + GitHub Actions
