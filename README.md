@@ -32,8 +32,13 @@ This included removing a lot of the pages included in the initial template and a
 
 4) Create a custom DNS domain name via AWS Route53
 - This step will also us to set a custom URL for our website
-- Navigate to Route 53 > register domain > enter domain name (I chose "<domain-name>.click" - this only costs £3 to run yearly) > checkout (I set auto-renew to No - I'll where I am in a year and renew if I want when the time comes)
-- In the CloudFront settings for your distribution, the Alternate domain names is not set. Select edit and Add item under CNAME
+- Navigate to Route 53 > register domain > enter domain name (I chose "<domain-name>.click" - this only costs £3 to run yearly) > checkout (I set auto-renew to No - I'll see where I am in a year and renew if I want when the time comes)
+- It took about 10 minutes for the domain to be registered
+- You do need to verify your email to avoid domain suspension - you can click "send email again" from your registered domain's page to get the email sent out if you didn't already get it (it took about 5 minutes for it to get to my inbox)
+- In the CloudFront settings for your distribution, the Alternate domain names is not set. Select edit and Add item under CNAME (I chose resume.<name>.click)
+- Request SSL Certificate > Request a public cert > Set fully qualified domain name (I set this as *.<name>.click  The wildcard (*.) will allow you to use this SSL for other domain ending in "<name>.click") > set tags "key: project" and "value: Cloud Resume Challenge" > Request and wait for validation 
+   - DNS Validation: If you're using DNS validation (which we are), the process is usually quicker, especially if you're using Amazon Route 53 as your DNS provider.
+   - After adding the required CNAME records, validation can often complete within minutes to a few hours - However, it's important to note that while the validation process itself may be quick, the certificate status might continue to display as "Pending validation" for up to 30 minutes, even after successful validation. (so its a waiting game rn -> validation completed after ....)
 
 5) Create a visitor counter via JavaScript
 
