@@ -38,7 +38,9 @@ This included removing a lot of the pages included in the initial template and a
 - In the CloudFront settings for your distribution, the Alternate domain names is not set. Select edit and Add item under CNAME (I chose resume.<name>.click)
 - Request SSL Certificate > Request a public cert > Set fully qualified domain name (I set this as *.<name>.click  The wildcard (*.) will allow you to use this SSL for other domain ending in "<name>.click") > set tags "key: project" and "value: Cloud Resume Challenge" > Request and wait for validation 
    - DNS Validation: If you're using DNS validation (which we are), the process is usually quicker, especially if you're using Amazon Route 53 as your DNS provider.
-   - After adding the required CNAME records, validation can often complete within minutes to a few hours - However, it's important to note that while the validation process itself may be quick, the certificate status might continue to display as "Pending validation" for up to 30 minutes, even after successful validation. (so its a waiting game rn -> validation completed after ....)
+   - After adding the required CNAME records, validation can often complete within minutes to a few hours - However, it's important to note that while the validation process itself may be quick, the certificate status might continue to display as "Pending validation" for up to 30 minutes, even after successful validation. (so its a waiting game rn -> validation completed after 4.5 hours)
+- After the validation has completed, you can select the SSL certificate from the drop down list in the distributions' settings > save changes
+- After the distribution changes have finished deploying, you should be able to access your resume via the alternate domain name (in this case its resume.<name>.click)
 
 5) Create a visitor counter via JavaScript
 
