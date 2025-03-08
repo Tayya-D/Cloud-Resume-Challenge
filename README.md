@@ -43,7 +43,8 @@ This included removing a lot of the pages included in the initial template and a
 - After the distribution changes have finished deploying, you should be able to access your resume via the alternate domain name (in this case its resume.<name>.click)
    - This did not work for me and the problem lies in Route53; as it seems that it has not updated automatically with our CNAME. So I needed to add it manually via Hosted Zones > <name>.click > create record > add the record name for the subdomain (in this case its "resume") > Alias = on > Endpoint = "Alias to ClouFront distribution" > distribution = select your created distribution (resume.<name>.click) > create record 
    - check if you can access your resume via your alternate name (it will take some time for the DNS to propogate so try after a few minutes - it took about 8 minutes for me and was successfully able to access my resume site via the CNAME) 
-   - A nice to have at this point would be to be able to use the AWS Tools Powershell so that I could check the change status of the DNS via a command like: "Get-R53HostedZone -Id YOUR_HOSTED_ZONE_ID", in the output, there would have been ChangeInfo section - from here I could have seen that status of the change
+   - A nice to have before this point would be to be able to use the AWS Tools Powershell so that I could check the change status of the DNS via a command like: "Get-R53HostedZone -Id YOUR_HOSTED_ZONE_ID", in the output, there would have been ChangeInfo section - from here I could have seen that status of the change
+   - You can also check to see your working SSL thats being used by the site via the lock icon on the left side of the URL bar, next to the starting https
 
 5) Create a visitor counter via JavaScript
 
