@@ -30,7 +30,7 @@ This included removing a lot of the pages included in the initial template and a
          - I had an issue where I encountered an "Access Denied" error message and proceeded to troubleshoot and went as far as to create an AppendIndexHTML function - the issue still persisted. 
          - The issue was that all my files (including the index.html) were in a parent folder. So I deleted everything in the bucket and reuploaded the files as the are; the only folder I had was the /images folder --> this ended up fixing my "Access Denied" error and fully loaded my resume as expected.  
 
-4) Create a custom DNS domain name via AWS Route53
+4) Create a custom DNS domain name via AWS Route53 + AWS Certficate Management (ACM) (COMPLETE)
 - This step will also us to set a custom URL for our website
 - Navigate to Route 53 > register domain > enter domain name (I chose "<name>.click" - this only costs £3 to run yearly) > checkout (I set auto-renew to No - I'll see where I am in a year and renew if I want when the time comes)
 - It took about 10 minutes for the domain to be registered
