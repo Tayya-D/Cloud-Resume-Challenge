@@ -32,7 +32,7 @@ This included removing a lot of the pages included in the initial template and a
 
 4) Create a custom DNS domain name via AWS Route53
 - This step will also us to set a custom URL for our website
-- Navigate to Route 53 > register domain > enter domain name (I chose "<domain-name>.click" - this only costs £3 to run yearly) > checkout (I set auto-renew to No - I'll see where I am in a year and renew if I want when the time comes)
+- Navigate to Route 53 > register domain > enter domain name (I chose "<name>.click" - this only costs £3 to run yearly) > checkout (I set auto-renew to No - I'll see where I am in a year and renew if I want when the time comes)
 - It took about 10 minutes for the domain to be registered
 - You do need to verify your email to avoid domain suspension - you can click "send email again" from your registered domain's page to get the email sent out if you didn't already get it (it took about 5 minutes for it to get to my inbox)
 - In the CloudFront settings for your distribution, the Alternate domain names is not set. Select edit and Add item under CNAME (I chose resume.<name>.click)
@@ -41,6 +41,9 @@ This included removing a lot of the pages included in the initial template and a
    - After adding the required CNAME records, validation can often complete within minutes to a few hours - However, it's important to note that while the validation process itself may be quick, the certificate status might continue to display as "Pending validation" for up to 30 minutes, even after successful validation. (so its a waiting game rn -> validation completed after 4.5 hours)
 - After the validation has completed, you can select the SSL certificate from the drop down list in the distributions' settings > save changes
 - After the distribution changes have finished deploying, you should be able to access your resume via the alternate domain name (in this case its resume.<name>.click)
+   - This did not work for me and the problem lies in Route53; as it seems that it has not updated automatically with our CNAME. So I needed to add it manually via Hosted Zones > <name>.click > create record > add the record name for the subdomain (in this case its "resume") > Alias = on > Endpoint = "Alias to ClouFront distribution" > distribution = select your created distribution (resume.<name>.click) > create record 
+   - check if you can access your resume via your alternate name (it will take some time for the DNS to propogate so try after a few minutes - it took about 8 minutes for me and was successfully able to access my resume site via the CNAME) 
+   - A nice to have at this point would be to be able to use the AWS Tools Powershell so that I could check the change status of the DNS via a command like: "Get-R53HostedZone -Id YOUR_HOSTED_ZONE_ID", in the output, there would have been ChangeInfo section - from here I could have seen that status of the change
 
 5) Create a visitor counter via JavaScript
 
