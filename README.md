@@ -4,6 +4,11 @@
 Following the Cloud Resume Challenge - I have put together my CV using a template that I liked as the base and then editted it to how I liked.
 This included removing a lot of the pages included in the initial template and amending the code for the design and content via HTML and CSS.
 
+## Prerequisites
+- Have an AWS Account  
+- Have VSCode setup
+- Have a GitHub Account
+
 ## Breakdown and Walkthrough of the Challenge
 1) Create your Resume/CV with HTML and CSS (COMPLETE)
 
