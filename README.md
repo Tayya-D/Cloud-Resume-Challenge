@@ -57,9 +57,23 @@ This included removing a lot of the pages included in the initial template and a
 6) Create a AWS DynamoDB to store and update the counter 
    - Navigate to the DynamoDB service (I changed the region to Europe-London) > create table > Table name = "cloudresume-test" > partition key = "id" > tags key: "project" value: "Cloud Resume Challenge" > create table
    - Once it has been created, click on the table and select "Explore table items" (we currently have no items - we want to create an item that updates and keeps track of the number of users that have visited our site - called "views" for example)
-   - Go back to the tables console for your table and under Actions select Create item > id value = "1" > add new attribute (Number) > Attribute name = "views" and value = "1" > create item
+   - Go back to the tables console for your table and under Actions select Create item > id value = "0" > add new attribute (Number) > Attribute name = "views" and value = "1" > create item
 
 7) Create an API that accepts requests from your web app and communicate with the DB using AWS API Gateway and Lambda
+   - Navigate to Lambda > create a function > Function Name = "cloudresume-test-api" > Runtime (I chose python 3.12 since that is what I'll be using to code the function) > Execution role (I'll be allowing a creation of a new role with basic Lambda permissions - if you already have a role that does this, you can just choose that instead) > under additional configs, select "Enable function URL" (This will give you a public URL that you can invoke your Lambda function through) > Auth type = NONE (this does mean anyone can call my API but we will be enabling CORS) > tick "Configure cross-origin resource sharing (CORS)" - this will allow us to WHITELIST our domain resume.<name>.click and this will be the only URL that will be allowed to FETCH data from this API > add the usual tags "project" and "Cloud Resume Challenge" > create function
+   - The provided Function URL will show you the output from your Lambda function
+   - Now we can add the code that call the views item from our DynamoDB table, update and return/print the value (I have included the lambda function code in this repo - although the AWS code editor was intelligent enough where I only had to type in 1 or 2 letters before I could just tab and auto complete the rest of the function code anyway - I did have to correct the "ID"s for "id"s and "view"s for "views" though and change the Table('cloud-resume-challenge'); which isn't a table I created btw, to Table('cloudresume-test'), since thats what I use in the table; its always good to check the code yourself and not trust the AI completely) > once satisfied deploy the function code
+      - The table still was not being updated so I checked the configuration for the Lambda and its function URL
+         - I though at first it might be because of the invoke mode but even after changing it I still got an "Internal Server Error"
+         - I couldn't see anything else wrong with the function itself so it might actually be the basic IAM role that was automatically created
+         - Looking at the Permissions tab of the Lambda function > clicking on the execution role name > we'll see it only has the AWSLambdaBasicExecutionRole and nothing else (it needs another policy to allow it to access and update the DynamoDB)
+         - Click on Add permissions and select the AmazonDynamoDBFullAccess (which allow both read and write permissions) --> And me, it still didn't work after testing
+         - After a bit more reading and research - I found that the both the Lambda and the DynamoDB had to be in the SAME REGION (my DB was in Europe(London) and the initial Lambda was in USA(N.Virginia)) -> So I recreated the same Lambda function this time called "cloud-resume-challenge-get_count" in the region EUROPE(LONDON) and it worked; printing the updated counter "2"
+
+
+
+      - First the Allow origin to set to all via the '*' -> UPDATED to https://resume.<name>.click/
+      - And the Invoke mode which is what was probably delaying the update to the table was set to BUFFERED -> UPDATED to RESPONSE_STREAM
 
 8) Use Python to code your Lambda functions
 
