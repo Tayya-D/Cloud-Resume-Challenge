@@ -36,24 +36,28 @@ This included removing a lot of the pages included in the initial template and a
          - The issue was that all my files (including the index.html) were in a parent folder. So I deleted everything in the bucket and reuploaded the files as the are; the only folder I had was the /images folder --> this ended up fixing my "Access Denied" error and fully loaded my resume as expected.  
 
 4) Create a custom DNS domain name via AWS Route53 + AWS Certficate Management (ACM) (COMPLETE)
-- This step will also us to set a custom URL for our website
-- Navigate to Route 53 > register domain > enter domain name (I chose "<name>.click" - this only costs £3 to run yearly) > checkout (I set auto-renew to No - I'll see where I am in a year and renew if I want when the time comes)
-- It took about 10 minutes for the domain to be registered
-- You do need to verify your email to avoid domain suspension - you can click "send email again" from your registered domain's page to get the email sent out if you didn't already get it (it took about 5 minutes for it to get to my inbox)
-- In the CloudFront settings for your distribution, the Alternate domain names is not set. Select edit and Add item under CNAME (I chose resume.<name>.click)
-- Request SSL Certificate > Request a public cert > Set fully qualified domain name (I set this as *.<name>.click  The wildcard (*.) will allow you to use this SSL for other domain ending in "<name>.click") > set tags "key: project" and "value: Cloud Resume Challenge" > Request and wait for validation 
-   - DNS Validation: If you're using DNS validation (which we are), the process is usually quicker, especially if you're using Amazon Route 53 as your DNS provider.
-   - After adding the required CNAME records, validation can often complete within minutes to a few hours - However, it's important to note that while the validation process itself may be quick, the certificate status might continue to display as "Pending validation" for up to 30 minutes, even after successful validation. (so its a waiting game rn -> validation completed after 4.5 hours)
-- After the validation has completed, you can select the SSL certificate from the drop down list in the distributions' settings > save changes
-- After the distribution changes have finished deploying, you should be able to access your resume via the alternate domain name (in this case its resume.<name>.click)
-   - This did not work for me and the problem lies in Route53; as it seems that it has not updated automatically with our CNAME. So I needed to add it manually via Hosted Zones > <name>.click > create record > add the record name for the subdomain (in this case its "resume") > Alias = on > Endpoint = "Alias to ClouFront distribution" > distribution = select your created distribution (resume.<name>.click) > create record 
-   - check if you can access your resume via your alternate name (it will take some time for the DNS to propogate so try after a few minutes - it took about 8 minutes for me and was successfully able to access my resume site via the CNAME) 
-   - A nice to have before this point would be to be able to use the AWS Tools Powershell so that I could check the change status of the DNS via a command like: "Get-R53HostedZone -Id YOUR_HOSTED_ZONE_ID", in the output, there would have been ChangeInfo section - from here I could have seen that status of the change
-   - You can also check to see your working SSL thats being used by the site via the lock icon on the left side of the URL bar, next to the starting https
+   - This step will also us to set a custom URL for our website
+   - Navigate to Route 53 > register domain > enter domain name (I chose "<name>.click" - this only costs £3 to run yearly) > checkout (I set auto-renew to No - I'll see where I am in a year and renew if I want when the time comes)
+   - It took about 10 minutes for the domain to be registered
+   - You do need to verify your email to avoid domain suspension - you can click "send email again" from your registered domain's page to get the email sent out if you didn't already get it (it took about 5 minutes for it to get to my inbox)
+   - In the CloudFront settings for your distribution, the Alternate domain names is not set. Select edit and Add item under CNAME (I chose resume.<name>.click)
+   - Request SSL Certificate > Request a public cert > Set fully qualified domain name (I set this as *.<name>.click  The wildcard (*.) will allow you to use this SSL for other domain ending in "<name>.click") > set tags "key: project" and "value: Cloud Resume Challenge" > Request and wait for validation 
+      - DNS Validation: If you're using DNS validation (which we are), the process is usually quicker, especially if you're using Amazon Route 53 as your DNS provider.
+      - After adding the required CNAME records, validation can often complete within minutes to a few hours - However, it's important to note that while the validation process itself may be quick, the certificate status might continue to display as "Pending validation" for up to 30 minutes, even after successful validation. (so its a waiting game rn -> validation completed after 4.5 hours)
+   - After the validation has completed, you can select the SSL certificate from the drop down list in the distributions' settings > save changes
+   - After the distribution changes have finished deploying, you should be able to access your resume via the alternate domain name (in this case its resume.<name>.click)
+      - This did not work for me and the problem lies in Route53; as it seems that it has not updated automatically with our CNAME. So I needed to add it manually via Hosted Zones > <name>.click > create record > add the record name for the subdomain (in this case its "resume") > Alias = on > Endpoint = "Alias to ClouFront distribution" > distribution = select your created distribution (resume.<name>.click) > create record 
+      - check if you can access your resume via your alternate name (it will take some time for the DNS to propogate so try after a few minutes - it took about 8 minutes for me and was successfully able to access my resume site via the CNAME) 
+      - A nice to have before this point would be to be able to use the AWS Tools Powershell so that I could check the change status of the DNS via a command like: "Get-R53HostedZone -Id YOUR_HOSTED_ZONE_ID", in the output, there would have been ChangeInfo section - from here I could have seen that status of the change
+      - You can also check to see your working SSL thats being used by the site via the lock icon on the left side of the URL bar, next to the starting https
 
 5) Create a visitor counter via JavaScript
+   - 
 
-6) Create a AWS DynamoDB to store and update the counter
+6) Create a AWS DynamoDB to store and update the counter 
+   - Navigate to the DynamoDB service (I changed the region to Europe-London) > create table > Table name = "cloudresume-test" > partition key = "id" > tags key: "project" value: "Cloud Resume Challenge" > create table
+   - Once it has been created, click on the table and select "Explore table items" (we currently have no items - we want to create an item that updates and keeps track of the number of users that have visited our site - called "views" for example)
+   - Go back to the tables console for your table and under Actions select Create item > id value = "1" > add new attribute (Number) > Attribute name = "views" and value = "1" > create item
 
 7) Create an API that accepts requests from your web app and communicate with the DB using AWS API Gateway and Lambda
 
