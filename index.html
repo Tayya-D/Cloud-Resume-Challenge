@@ -399,6 +399,23 @@
             color: #937bcc;
         }
 
+		/* Add this style to ensure the counter number is hidden by default */
+		.counter-number {
+        font-family: monospace;  /* Uses a fixed-width font like in a terminal */
+        font-size: 1.2rem;       /* Adjust text size */
+        color: #937bcc;          
+        background-color: #2e2a2a44;  /* Black background */
+        padding: 5px 10px;       /* Adds some space inside the box */
+        border-radius: 4px;      /* Rounds corners slightly */
+        display: none;           /* Hide it initially */
+        /* Add more styles as per your requirement */
+    }
+
+    /* Show counter only when the class 'is-visible' is added */
+    	.counter-number.is-visible {
+        	display: inline-block;    /* Show the counter when it's visible */
+    }
+
         a,
         .entry-meta:not(.entry-tags-share) a:hover {
             color: #0099cc;
@@ -477,7 +494,7 @@
         .form-control ~ .form-control-border,
         .elementor .form-control ~ .form-control-border,
         .elementor .timeline .divider:after {
-            border-color: #04B4E0;
+            border-color: #937bcc;
         }
 
         @media only screen and (max-width: 1024px) {
@@ -687,6 +704,7 @@
                                                     </a>
                     </li>
                                 </ul>
+								<div  class="counter-number"><a href="index.html" target="_self" class="btn btn-primary">Couldn't fetch views</a></div>
             </div>
                         <!-- /Social Links -->
 
@@ -698,13 +716,18 @@
                                             <a href="https://github.com/Tayya-D/Cloud-Resume-Challenge" target="_self" class="btn btn-primary">Visit My GitHub</a>
                                     </div>
 
-									<div class="header-buttons" class="counter-number">
-										<a href="index.html" target="_self" class="btn btn-primary">Couldn't red views</a>
-								</div>
+									
                                             <!-- /Buttons -->
+
+											<!-- JS-counter -->
+
+											
+
+										<!-- /JS-counter -->
 
             <!-- Copyrights -->
                         <div class="copyrights">© 2022 All rights reserved.</div>
+						
                         <!-- /Copyrights -->
         </header>
 

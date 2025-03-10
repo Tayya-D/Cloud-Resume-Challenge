@@ -51,8 +51,13 @@ This included removing a lot of the pages included in the initial template and a
       - A nice to have before this point would be to be able to use the AWS Tools Powershell so that I could check the change status of the DNS via a command like: "Get-R53HostedZone -Id YOUR_HOSTED_ZONE_ID", in the output, there would have been ChangeInfo section - from here I could have seen that status of the change
       - You can also check to see your working SSL thats being used by the site via the lock icon on the left side of the URL bar, next to the starting https
 
-5) Create a visitor counter via JavaScript
-   - Back the code editor - create a new file for index.js and code a asyn function that fetches the counter (or in our case the number of views from the AWS DynamoDB we created) The code used is in the index.js folder in this repo. Also added a script to the index.html file to call the index.js file to run the function.
+5) Create a visitor counter via JavaScript + Update HTML to show the counter (COMPLETE)
+   - Back the code editor - create a new file for index.js and code a asyn function that fetches the counter (or in our case the number of views from the AWS Lambda we created) The code used is in the index.js folder in this repo. Also added a script to the index.html file to call the index.js file to run the function.
+   - Now updating the HTML to show the number of views using the class 'counter-number', since thats the name of the JS script. Addionnally included a "Couldn't fetch views" message in case the JS script could not fetch the data from the AWS Lambda.
+   - After testing I ran into a problem where by instead of the number of views being displayed - I was instead getting 'Views: ${data}' being returned
+      - So clearly I had made a mistake with the JavaScript - after a quick troubleshoot turns out I used '' and not the required `` for the script to work. Post fixing that, my webpage successfully fetched and displayed the number of views.
+      - BUT when the page first loads - before the JS code can fully propagate, it appears to use the wrong CSS style despite me coding the CSS code the counter-number class. 
+      - To fix THIS problem, I had to add a is-visable class to my CSS and amend my JS file so that the counter is completely hidden at the start THEN shows the view counter only when it has fully loaded. I added a try-catch block for good measure to handle any errors that may pop up during fetching the data
 
 6) Create a AWS DynamoDB to store and update the counter (COMPLETE)
    - Navigate to the DynamoDB service (I changed the region to Europe-London) > create table > Table name = "cloudresume-test" > partition key = "id" > tags key: "project" value: "Cloud Resume Challenge" > create table
