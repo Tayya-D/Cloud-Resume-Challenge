@@ -52,7 +52,7 @@ This included removing a lot of the pages included in the initial template and a
       - You can also check to see your working SSL thats being used by the site via the lock icon on the left side of the URL bar, next to the starting https
 
 5) Create a visitor counter via JavaScript
-   - 
+   - Back the code editor - create a new file for index.js and code a asyn function that fetches the counter (or in our case the number of views from the AWS DynamoDB we created) The code used is in the index.js folder in this repo. Also added a script to the index.html file to call the index.js file to run the function.
 
 6) Create a AWS DynamoDB to store and update the counter (COMPLETE)
    - Navigate to the DynamoDB service (I changed the region to Europe-London) > create table > Table name = "cloudresume-test" > partition key = "id" > tags key: "project" value: "Cloud Resume Challenge" > create table
