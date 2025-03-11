@@ -51,7 +51,7 @@ This included removing a lot of the pages included in the initial template and a
       - A nice to have before this point would be to be able to use the AWS Tools Powershell so that I could check the change status of the DNS via a command like: "Get-R53HostedZone -Id YOUR_HOSTED_ZONE_ID", in the output, there would have been ChangeInfo section - from here I could have seen that status of the change
       - You can also check to see your working SSL thats being used by the site via the lock icon on the left side of the URL bar, next to the starting https
 
-5) Create a visitor counter via JavaScript + Update HTML to show the counter (COMPLETE)
+5) Create a visitor counter via JavaScript + Update HTML to show the counter (COMPLETE) - after steps 6 + 7...
    - Back the code editor - create a new file for index.js and code a asyn function that fetches the counter (or in our case the number of views from the AWS Lambda we created) The code used is in the index.js folder in this repo. Also added a script to the index.html file to call the index.js file to run the function.
    - Now updating the HTML to show the number of views using the class 'counter-number', since thats the name of the JS script. Addionnally included a "Couldn't fetch views" message in case the JS script could not fetch the data from the AWS Lambda.
    - After testing I ran into a problem where by instead of the number of views being displayed - I was instead getting 'Views: ${data}' being returned
@@ -64,7 +64,7 @@ This included removing a lot of the pages included in the initial template and a
    - Once it has been created, click on the table and select "Explore table items" (we currently have no items - we want to create an item that updates and keeps track of the number of users that have visited our site - called "views" for example)
    - Go back to the tables console for your table and under Actions select Create item > id value = "0" > add new attribute (Number) > Attribute name = "views" and value = "1" > create item
 
-7) Create an API that accepts requests from your web app and communicate with the DB using AWS API Gateway and Lambda (COMPLETE)
+7) Create an API that accepts requests from your web app and communicate with the DB using AWS API Gateway and Lambda (I used Python for the script) (COMPLETE)
    - Navigate to Lambda > create a function > Function Name = "cloudresume-test-api" > Runtime (I chose python 3.12 since that is what I'll be using to code the function) > Execution role (I'll be allowing a creation of a new role with basic Lambda permissions - if you already have a role that does this, you can just choose that instead) > under additional configs, select "Enable function URL" (This will give you a public URL that you can invoke your Lambda function through) > Auth type = NONE (this does mean anyone can call my API but we will be enabling CORS) > tick "Configure cross-origin resource sharing (CORS)" - this will allow us to WHITELIST our domain resume.<name>.click and this will be the only URL that will be allowed to FETCH data from this API > add the usual tags "project" and "Cloud Resume Challenge" > create function
    - The provided Function URL will show you the output from your Lambda function
    - Now we can add the code that call the views item from our DynamoDB table, update and return/print the value (I have included the lambda function code in this repo - although the AWS code editor was intelligent enough where I only had to type in 1 or 2 letters before I could just tab and auto complete the rest of the function code anyway - I did have to correct the "ID"s for "id"s and "view"s for "views" though and change the Table('cloud-resume-challenge'); which isn't a table I created btw, to Table('cloudresume-test'), since thats what I use in the table; its always good to check the code yourself and not trust the AI completely) > once satisfied deploy the function code
@@ -75,14 +75,23 @@ This included removing a lot of the pages included in the initial template and a
          - Click on Add permissions and select the AmazonDynamoDBFullAccess (which allow both read and write permissions) --> And me, it still didn't work after testing
          - After a bit more reading and research - I found that the both the Lambda and the DynamoDB had to be in the SAME REGION (my DB was in Europe(London) and the initial Lambda was in USA(N.Virginia)) -> So I recreated the same Lambda function this time called "cloud-resume-challenge-get_count" in the region EUROPE(LONDON) and it worked; printing the updated counter "2" and we can see the same in the DynamoDB table (if you have AWS Tools for Powershell configured - you could curl your lambda function url and it'll return the number of views 'curl <lambda_function_url>')
 
+8) Include some tests in your Python code 
 
-8) Use Python to code your Lambda functions
+9) Configure your API resources using Infrastructure as Code via Terraform
 
-9) Include some tests in your Python code 
 
-10) Configure your API resources using Infrastructure as Code via Terraform
-11) Create a GitHub repo to manage your CI/CD Back-End + GitHub Actions
-12) Create a GitHub repo to manage your CI/CD Front-End to for your website + GitHub Actions
+10) Create a GitHub repo to manage your CI/CD Back-End + GitHub Actions
+   
+
+11) Create a GitHub repo to manage your CI/CD Front-End to for your website + GitHub Actions
+   - Create a folder in your root folder and name it .github\workflows where we'll be writing our YAML file
+   - Create a file called front-end-cicd.yml and code the github action that will be responsible for uploading our new content as we push the changes to the github repo to the S3 bucket.
+   - The GitHub Action itself will only trigger when there is a push on the main branch (can add an button that will have to be clicked to finalize the GitHub Action to trigger - can refer to documentation - will look into doing this myself to better understand the functionality); and is configured with the appropriate steps and environment variables/properties.
+   - GitHub Actions needs to be authenticated to be able to access the S3 bucket therefore we provide it this the configured secrets (that can be setup in GitHub) for the AWS access key id and secret access key; rather than hardcoding these sensitive pieces of information
+   - In the GitHub action code - I made sure to set the correct region (in my case it was eu-west-2 - you can check on your AWS S3 console to verify the region of the bucket)
+   - Set the source directory as the name of the folder that holds your website files (for me, I had to take everything out of my initial parent folder for the website even load properly; so now my file are in the root of my project directory. So I'll be using '.')
+
+   - install github actions in VS Code?
 
 ## Installation
 1. Clone the repository:
