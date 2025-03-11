@@ -90,6 +90,8 @@ This included removing a lot of the pages included in the initial template and a
    - GitHub Actions needs to be authenticated to be able to access the S3 bucket therefore we provide it this the configured secrets (that can be setup in GitHub) for the AWS access key id and secret access key; rather than hardcoding these sensitive pieces of information
    - In the GitHub action code - I made sure to set the correct region (in my case it was eu-west-2 - you can check on your AWS S3 console to verify the region of the bucket)
    - Set the source directory as the name of the folder that holds your website files (for me, I had to take everything out of my initial parent folder for the website even load properly; so now my file are in the root of my project directory. So I'll be using '.')
+   - Once the code is pushed - you can now see news Actions being propagated in the Action tab of the GitHub repo.
+      - Mine failed because I have not set up my GitHub Secrets yet - so that's what I'll do now
 
    - install github actions in VS Code?
 
