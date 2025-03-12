@@ -106,6 +106,8 @@ This included removing a lot of the pages included in the initial template and a
    - 'terraform apply' + enter 'yes' > view the newly created resources via AWS console.
    - The newly created lambda needs a function url > add this via terraform code in main.tf using aws_lambda_function_url resource
    - Terraform plan and apply after configuring the function url (terraform state comes in to play at this point as it recogizes it only has one new resource to add and nothing else to create or change as the other resources had already previously been created)
+   - Created an aws_iam_role_policy_attachment resource to attach our lambda to the newly created policy
+   - terraform validate, plan and apply once all good
 
 
 11) Create a GitHub repo to manage your CI/CD Back-End + GitHub Actions
