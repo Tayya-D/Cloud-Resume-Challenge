@@ -28,3 +28,9 @@ resource "aws_iam_role" "iam_for_lambda" {
 }  
 EOF 
 }
+
+data "archive_file" "zip" {
+    type = "zip"
+    source_dir = "${path.module}/lambda/"
+    output_path = "${path.module}/packedlambda.zip" 
+}
