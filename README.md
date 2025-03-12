@@ -105,6 +105,7 @@ This included removing a lot of the pages included in the initial template and a
       - After making the changes and running 'terraform plan' again - it ran successfully and output the plan to add 2 new resources: the iam role and the lambda function (running 'terraform validate' will inform you if you have any issues)
    - 'terraform apply' > view the newly created resources via AWS console.
    - The newly created lambda needs a function url > add this via terraform code in main.tf using aws_lambda_function_url resource
+   - Terraform plan and apply after configuring the function url (terraform state comes in to play at this point as it recogizes it only has one new resource to add and nothing else to create or change as the other resources had already previously been created)
 
 
 11) Create a GitHub repo to manage your CI/CD Back-End + GitHub Actions
