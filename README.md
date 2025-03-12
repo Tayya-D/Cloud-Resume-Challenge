@@ -97,6 +97,7 @@ This included removing a lot of the pages included in the initial template and a
       - https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
       - Once installed check install with 'aws --version' on your cmd
       - If successful, proceed to configure your cli profile -> 'aws configure --profile <profile-name>' (I chose 'dev' as the <profile-name>) > have on hand your access id key and secret key, set your region and set the output format (I set it to json) > to check its been configured correctly use the command 'aws configure list --profile <profile-name>'
+   - Coded aws_lambda_function and aws_iam_role to allow the use of the Lambda service
 
 
 11) Create a GitHub repo to manage your CI/CD Back-End + GitHub Actions
