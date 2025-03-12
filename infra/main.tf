@@ -29,6 +29,44 @@ resource "aws_iam_role" "iam_for_lambda" {
 EOF 
 }
 
+resource "aws_iam_policy" "iam_policy_for_resume_project" {
+
+    name = "aws_iam_policy_for_terraform_resume_project_policy"
+    path = "/"
+    description = "AWS IAM Policy for managing the resume project role"
+    policy = jsondecode(
+        {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ReadWriteTable",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:GetItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem"
+            ],
+            "Resource": "arn:aws:dynamodb:*:*:table/cloudresume-test"
+        },
+        {
+            "Sid": "WriteLogStreamsAndGroups",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "CreateLogGroup",
+            "Effect": "Allow",
+            "Action": "logs:CreateLogGroup",
+            "Resource": "*"
+        }
+    ]
+    })
+}
+
 data "archive_file" "zip" {
     type = "zip"
     source_dir = "${path.module}/lambda/"
