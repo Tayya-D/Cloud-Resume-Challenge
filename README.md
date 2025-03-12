@@ -91,6 +91,12 @@ This included removing a lot of the pages included in the initial template and a
 9) Include some tests in your Python code 
 
 10) Configure your API resources using Infrastructure as Code via Terraform
+   - Create a new folder called 'infra' in the root of the project folder and create a main.tf file and provider.tf file
+   - Configure appropriate providers in the provider file for 'aws', versioning and cli profile
+   - Before proceeding, install the AWS CLI so we can set up a AWS CLI profile 
+      - https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+      - Once installed check install with 'aws --version' on your cmd
+      - If successful, proceed to configure your cli profile -> 'aws configure --profile <profile-name>' (I chose 'dev' as the <profile-name>) > have on hand your access id key and secret key, set your region and set the output format (I set it to json) > to check its been configured correctly use the command 'aws configure list --profile <profile-name>'
 
 
 11) Create a GitHub repo to manage your CI/CD Back-End + GitHub Actions
