@@ -100,7 +100,11 @@ This included removing a lot of the pages included in the initial template and a
    - Coded aws_lambda_function and aws_iam_role to allow the use of the Lambda service
    - Create a lambda folder in the infra folder with the file func.py which is going to hold the lambda function code
    - Copy and paste the lambda function code we created for fetching the number of views for our website, in the func.py file
-   
+   - If you have terraform installed and set up locally > on the terminal navigate to the infra folder and initialize terraform via 'terraform init' followed by 'terraform plan' (I run this in windows powershell terminal)
+      - Initially I got a Syntax error for my Lambda function - so I passed it through a JSON validator; turns out I was missing a ','
+      - After making the changes and running 'terraform plan' again - it ran successfully and output the plan to add 2 new resources: the iam role and the lambda function (running 'terraform validate' will inform you if you have any issues)
+   - 'terraform apply' > view the newly created resources via AWS console.
+   - The newly created lambda needs a function url > add this via terraform code in main.tf using aws_lambda_function_url resource
 
 
 11) Create a GitHub repo to manage your CI/CD Back-End + GitHub Actions

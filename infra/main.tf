@@ -20,7 +20,7 @@ resource "aws_iam_role" "iam_for_lambda" {
                 "Principal": {
                     "Service": "lambda.amazonaws.com"
                 },
-                "Effect": "Allow"
+                "Effect": "Allow",
                 "Sid": ""
             }
         ]
@@ -33,4 +33,18 @@ data "archive_file" "zip" {
     type = "zip"
     source_dir = "${path.module}/lambda/"
     output_path = "${path.module}/packedlambda.zip" 
+}
+
+resource "aws_lambda_function_url" "url1" {
+    function_name = aws_lambda_function.myfunc.function_name
+    authorization_type = "NONE"
+
+    cors {
+        allow_credentials = true
+        allow_origins = ["*"] # can set this to the website name so only the wesite can access the lambda
+        allow_methods = ["*"]
+        allow_headers = ["date", "keep-alive"]
+        expose_headers = ["keep-alive", "date"]
+        max_age = 86400
+    }
 }
