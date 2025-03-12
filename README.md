@@ -108,6 +108,8 @@ This included removing a lot of the pages included in the initial template and a
    - Terraform plan and apply after configuring the function url (terraform state comes in to play at this point as it recogizes it only has one new resource to add and nothing else to create or change as the other resources had already previously been created)
    - Created an aws_iam_role_policy_attachment resource to attach our lambda to the newly created policy
    - terraform validate, plan and apply once all good
+   - When testing the function url - it did not work and got an internal server error
+      - I looked through the policy again and realised I didn't have the permission dynamodb:query in the list of allowed permissions (it made sense that this was the problem as this is what we'll want to be doing when fetching the views count and displaying it)
 
 
 11) Create a GitHub repo to manage your CI/CD Back-End + GitHub Actions
