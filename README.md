@@ -74,7 +74,7 @@ This project is part of the **Cloud Resume Challenge**, where I built and deploy
 
 Below is the architecture diagram for the project:
 
-![Architecture Diagram](images/cloud-resume-architechure)
+![Architecture Diagram](images/cloud-resume-architechure.png)
 
 ### Diagram Explanation:
 - **User Access**: Users access the website via the custom domain.
