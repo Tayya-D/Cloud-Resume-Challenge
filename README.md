@@ -118,14 +118,6 @@ Below is the architecture diagram for the project:
 
 ---
 
-## 🧠 Challenges and Learnings
-- Resolved **region mismatches** between AWS services.
-- Fixed **ACL** and **permission issues** for S3 and Lambda.
-- Learned to configure **CORS** and secure API endpoints.
-- Gained hands-on experience with **Terraform** for Infrastructure as Code.
-
----
-
 ## 📝 Notes/Thoughts on the Project
 
 ### 🧠 **Key Learnings**
