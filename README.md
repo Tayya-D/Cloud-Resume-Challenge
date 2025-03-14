@@ -70,6 +70,20 @@ This project is part of the **Cloud Resume Challenge**, where I built and deploy
 
 ---
 
+## 📊 Architecture Diagram
+
+Below is the architecture diagram for the project:
+
+![Architecture Diagram](images/cloud-resume-architechure)
+
+### Diagram Explanation:
+- **User Access**: Users access the website via the custom domain.
+- **CloudFront**: Serves static content from the S3 bucket.
+- **Route 53**: Handles DNS resolution for the custom domain.
+- **API Gateway**: Invokes the Lambda function to fetch and update the visitor count.
+- **DynamoDB**: Stores and retrieves the visitor count.
+
+---
 ## 🛠️ Installation
 1. Clone the repository:
    ```sh
