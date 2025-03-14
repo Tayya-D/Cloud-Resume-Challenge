@@ -67,7 +67,7 @@ This included removing a lot of the pages included in the initial template and a
          - Click on Add permissions and select the AmazonDynamoDBFullAccess (which allow both read and write permissions) --> And me, it still didn't work after testing
          - After a bit more reading and research - I found that the both the Lambda and the DynamoDB had to be in the SAME REGION (my DB was in Europe(London) and the initial Lambda was in USA(N.Virginia)) -> So I recreated the same Lambda function this time called "cloud-resume-challenge-get_count" in the region EUROPE(LONDON) and it worked; printing the updated counter "2" and we can see the same in the DynamoDB table (if you have AWS Tools for Powershell configured - you could curl your lambda function url and it'll return the number of views 'curl <lambda_function_url>')
 
-7) Create a visitor counter via JavaScript + Update HTML to show the counter (COMPLETE) - after steps 6 + 7...
+7) Create a visitor counter via JavaScript + Update HTML to show the counter (COMPLETE)
    - Back the code editor - create a new file for index.js and code a asyn function that fetches the counter (or in our case the number of views from the AWS Lambda we created) The code used is in the index.js folder in this repo. Also added a script to the index.html file to call the index.js file to run the function.
    - Now updating the HTML to show the number of views using the class 'counter-number', since thats the name of the JS script. Addionnally included a "Couldn't fetch views" message in case the JS script could not fetch the data from the AWS Lambda.
    - After testing I ran into a problem where by instead of the number of views being displayed - I was instead getting 'Views: ${data}' being returned
