@@ -76,7 +76,7 @@ More detailed notes can be found in this repos (/project-resources/detailed-walk
 
 Below is the architecture diagram for the project:
 
-![Architecture Diagram](images/AWS-resume-diagram.png)
+![Architecture Diagram](images/diagram-export-3-15-2025-3_01_32-PM.png)
 
 ### Diagram Explanation:
 - **User Access**: Users access the website via the custom domain.
