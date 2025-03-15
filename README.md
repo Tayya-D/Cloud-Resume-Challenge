@@ -6,6 +6,8 @@
 ## 📝 Description
 This project is part of the **Cloud Resume Challenge**, where I built and deployed my resume as a static website using **AWS services**. The website includes a **visitor counter** powered by **AWS DynamoDB**, **Lambda**, and **API Gateway**, with **CI/CD pipelines** managed via **GitHub Actions**. The infrastructure is provisioned using **Terraform** for **Infrastructure as Code (IaC)**.
 
+More detailed notes can be found in this repos (/project-resources/detailed-walkthrough-notes)
+
 ---
 
 ## 🛠️ Prerequisites
